@@ -2,6 +2,8 @@ package io.github.brunoyillli.organizadorreceitas.entity;
 
 import android.graphics.Bitmap;
 
+import java.util.List;
+
 public class Recipe {
     private String name;
     private String ingredients;
@@ -10,14 +12,24 @@ public class Recipe {
     private int servingCount;
     private Bitmap photo;
 
+    private List<MealTypeEnum> mealType;
+
+    private boolean active;
+
+    private String categoria;
+
     public Recipe(String name, String ingredients, String instructions, String preparationTime,
-                  int servingCount, Bitmap photo) {
+                  int servingCount, Bitmap photo, List<MealTypeEnum> mealType,
+                  boolean active, String categoria)  {
         this.name = name;
         this.ingredients = ingredients;
         this.instructions = instructions;
         this.preparationTime = preparationTime;
         this.servingCount = servingCount;
         this.photo = photo;
+        this.mealType = mealType;
+        this.active = active;
+        this.categoria = categoria;
     }
 
     public Recipe() {
@@ -69,5 +81,29 @@ public class Recipe {
 
     public void setPhoto(Bitmap photo) {
         this.photo = photo;
+    }
+
+    public List<MealTypeEnum> getMealType() {
+        return mealType;
+    }
+
+    public void setMealType(List<MealTypeEnum> mealType) {
+        this.mealType = mealType;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 }

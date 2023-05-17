@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="categorias_receitas">
+        <item>@string/sushi</item>
+        <item>@string/massas</item>
+        <item>@string/sobremesas</item>
+        <item>@string/pratos_vegetarianos</item>
+        <item>@string/pratos_veganos</item>
+        <item>@string/saladas</item>
+        <item>@string/churrasco</item>
+        <item>@string/comida_mexicana</item>
+        <item>@string/comida_italiana</item>
+        <item>@string/comida_indiana</item>
+        <item>@string/comida_tailandesa</item>
+        <item>@string/comida_chinesa</item>
+        <item>@string/comida_japonesa</item>
+        <item>@string/comida_brasileira</item>
+        <item>@string/comida_francesa</item>
+    </string-array>
+</resources>
