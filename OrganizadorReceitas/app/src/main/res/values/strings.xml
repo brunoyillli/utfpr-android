@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">OrganizadorReceitas</string>
+    <string name="nome">Nome</string>
+    <string name="ingredientes">Ingredientes</string>
+    <string name="modo_preparado">Modo Preparo</string>
+    <string name="tempo_de_preparo">Tempo de Preparo</string>
+    <string name="numero_de_porcoes">Número de Porções</string>
+    <string name="cadastro_de_receitas">Cadastro de Receitas</string>
+    <string name="selecionar_foto">Selecionar Foto</string>
+    <string name="caturar_foto">Capturar Foto</string>
+    <string name="receitada_cadastrada_com_sucesso">Receitada cadastrada com sucesso!</string>
+    <string name="por_favor_preencha_todos_os_campos">Por favor, preencha todos os campos.</string>
+</resources>
