@@ -37,4 +37,24 @@
     <string name="salvar">Salvar</string>
     <string name="limpar">Limpar</string>
 
+    <string name="luiz">Luiz</string>
+    <string name="maria">Maria</string>
+    <string name="jose">José</string>
+    <string name="ana">Ana</string>
+    <string name="pedro">Pedro</string>
+    <string name="carla">Carla</string>
+    <string name="marcos">Marcos</string>
+    <string name="fernanda">Fernanda</string>
+    <string name="rodrigo">Rodrigo</string>
+    <string name="luana">Luana</string>
+
+    <string name="masculino">Masculino</string>
+    <string name="feminino">Feminino</string>
+    <string name="genero">Genero</string>
+    <string name="categoria_favorita">Categoria favorita</string>
+    <string name="data_inscricao">Data inscrição</string>
+    <string name="comida_favorita">Comida Favorita</string>
+    <string name="usuario_pressionado_detalhes">"Usuario pressionado detalhes: : "</string>
+    <string name="usuario_pressionado">"Usuario pressionado: "</string>
+
 </resources>

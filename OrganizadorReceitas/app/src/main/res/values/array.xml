@@ -17,4 +17,66 @@
         <item>@string/comida_brasileira</item>
         <item>@string/comida_francesa</item>
     </string-array>
+
+    <string-array name="nomes_usuarios">
+        <item>@string/luiz</item>
+        <item>@string/maria</item>
+        <item>@string/jose</item>
+        <item>@string/ana</item>
+        <item>@string/pedro</item>
+        <item>@string/carla</item>
+        <item>@string/marcos</item>
+        <item>@string/fernanda</item>
+        <item>@string/rodrigo</item>
+        <item>@string/luana</item>
+    </string-array>
+
+    <string-array name="sexos_usuario">
+        <item>@string/masculino</item>
+        <item>@string/feminino</item>
+        <item>@string/masculino</item>
+        <item>@string/feminino</item>
+        <item>@string/masculino</item>
+        <item>@string/feminino</item>
+        <item>@string/masculino</item>
+        <item>@string/feminino</item>
+        <item>@string/masculino</item>
+        <item>@string/feminino</item>
+    </string-array>
+
+    <string-array name="categorias_receitas_usuario">
+        <item>@string/sushi</item>
+        <item>@string/massas</item>
+        <item>@string/sobremesas</item>
+        <item>@string/pratos_vegetarianos</item>
+        <item>@string/pratos_veganos</item>
+        <item>@string/saladas</item>
+        <item>@string/churrasco</item>
+        <item>@string/comida_mexicana</item>
+        <item>@string/comida_italiana</item>
+        <item>@string/comida_indiana</item>
+    </string-array>
+
+    <string-array name="comidas_favoritas">
+        <item>@string/feijoada</item>
+        <item>@string/buxada</item>
+        <item>@string/catador</item>
+        <item>@string/baiao_de_dois</item>
+        <item>@string/salmao_grelhado</item>
+        <item>@string/pizza</item>
+        <item>@string/churrasco</item>
+        <item>@string/macarronada</item>
+        <item>@string/farofa</item>
+        <item>@string/panqueca</item>
+    </string-array>
+
+    <string name="feijoada">Feijoada</string>
+    <string name="buxada">Buxada</string>
+    <string name="catador">Feijão de corda</string>
+    <string name="baiao_de_dois">Baião de dois</string>
+    <string name="salmao_grelhado">Salmão Grelhado</string>
+    <string name="pizza">Pizza</string>
+    <string name="macarronada">Macarronada</string>
+    <string name="farofa">Farofa</string>
+    <string name="panqueca">Panqueca</string>
 </resources>
