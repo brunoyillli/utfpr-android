@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Activity2</string>
+    <string name="nome">Nome</string>
+    <string name="possui_carro">Possui Carro</string>
+    <string name="aluno">Aluno</string>
+    <string name="professor">Professor</string>
+    <string name="enviar">Enviar</string>
+    <string name="nao_cadastrado">Não cadastrado</string>
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
+    <string name="nenhum_tipo_escolhido">Nenhum tipo escolhido</string>
+    <string name="enviar_pedir_nota">Enviar e pedir nota</string>
+    <string name="nota">"Nota: "</string>
+</resources>
