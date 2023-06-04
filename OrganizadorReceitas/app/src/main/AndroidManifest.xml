@@ -13,6 +13,9 @@
         android:theme="@style/Theme.OrganizadorReceitas"
         tools:targetApi="31">
         <activity
+            android:name=".AuditActivity"
+            android:exported="false" />
+        <activity
             android:name=".UserRecyclerViewActivity"
             android:exported="true">
             <intent-filter>
@@ -21,9 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".RecipeCreationActivity">
-        </activity>
+        <activity android:name=".RecipeCreationActivity"></activity>
     </application>
 
 </manifest>

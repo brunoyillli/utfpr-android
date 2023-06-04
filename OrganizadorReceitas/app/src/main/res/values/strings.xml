@@ -56,5 +56,10 @@
     <string name="comida_favorita">Comida Favorita</string>
     <string name="usuario_pressionado_detalhes">"Usuario pressionado detalhes: : "</string>
     <string name="usuario_pressionado">"Usuario pressionado: "</string>
+    <string name="logo_utfpr">Logo UTFPR</string>
+    <string name="nome_criador">Bruno Mendes Carvalho</string>
+    <string name="nome_utfpr">UTFPR - Universidade Tecnológica Federal do Paraná</string>
+    <string name="nome_especializacao">Técnologia em Java</string>
+    <string name="descricao_projeto">Sistema para gerenciar as duas receitas!</string>
 
 </resources>
