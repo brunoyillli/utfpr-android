@@ -1,9 +1,6 @@
 package io.github.brunoyillli.organizadorreceitas;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -18,6 +15,10 @@ import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -48,10 +49,12 @@ public class RecipeCreationActivity extends AppCompatActivity {
     private static final int RADIO_BUTTON_ATIVADA = R.id.radioButtonAtivada;
     private static final int RADIO_BUTTON_DESATIVADA = R.id.radioButtonDesativada;
 
-    public static final String MODO    = "MODO";
-    public static final int    NOVO    = 1;
+    public static final String MODO = "MODO";
+    public static final String RECIPE = "RECIPE";
 
-    public static void novaReceita(AppCompatActivity activity){
+    public static final int NOVO = 1;
+
+    public static void novaReceita(AppCompatActivity activity) {
         Intent intent = new Intent(activity, RecipeCreationActivity.class);
         intent.putExtra(MODO, NOVO);
         activity.startActivityForResult(intent, NOVO);
@@ -168,6 +171,17 @@ public class RecipeCreationActivity extends AppCompatActivity {
 
         Toast.makeText(this,
                 R.string.receitada_cadastrada_com_sucesso, Toast.LENGTH_LONG).show();
+
+        gerarIntentRecipe(recipe);
+    }
+
+    private void gerarIntentRecipe(Recipe recipe) {
+        Intent intent = new Intent();
+        intent.putExtra(RECIPE, recipe);
+
+        setResult(Activity.RESULT_OK, intent);
+
+        finish();
     }
 
     public void limpar(View view) {
@@ -190,7 +204,13 @@ public class RecipeCreationActivity extends AppCompatActivity {
                 Toast.LENGTH_LONG).show();
     }
 
-    public void voltarMenu(View view){
-        UserRecyclerViewActivity.menu(this);
+    public void voltarMenu(View view) {
+        onBackPressed();
+    }
+
+    @Override
+    public void onBackPressed() {
+        setResult(Activity.RESULT_CANCELED);
+        finish();
     }
 }

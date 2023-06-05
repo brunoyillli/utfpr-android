@@ -2,15 +2,16 @@ package io.github.brunoyillli.organizadorreceitas.entity;
 
 import android.graphics.Bitmap;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Recipe {
+public class Recipe implements Serializable {
     private String name;
     private String ingredients;
     private String instructions;
     private String preparationTime;
     private int servingCount;
-    private Bitmap photo;
+    private transient Bitmap photo;
 
     private List<MealTypeEnum> mealType;
 
