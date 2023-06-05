@@ -16,7 +16,7 @@
             android:name=".AuditActivity"
             android:exported="false" />
         <activity
-            android:name=".UserRecyclerViewActivity"
+            android:name=".RecipeRecyclerViewActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

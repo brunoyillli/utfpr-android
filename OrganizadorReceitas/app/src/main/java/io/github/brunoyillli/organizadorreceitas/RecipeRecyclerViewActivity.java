@@ -19,7 +19,7 @@ import java.util.List;
 import io.github.brunoyillli.organizadorreceitas.adapter.AdapteRecipe;
 import io.github.brunoyillli.organizadorreceitas.entity.Recipe;
 
-public class UserRecyclerViewActivity extends AppCompatActivity {
+public class RecipeRecyclerViewActivity extends AppCompatActivity {
 
     private RecyclerView recyclerRecipe;
     private List<Recipe> listRecipe = new ArrayList<>();
@@ -27,16 +27,16 @@ public class UserRecyclerViewActivity extends AppCompatActivity {
     private AdapteRecipe adapteRecipe;
 
     public static void menu(AppCompatActivity activity) {
-        Intent intent = new Intent(activity, UserRecyclerViewActivity.class);
+        Intent intent = new Intent(activity, RecipeRecyclerViewActivity.class);
         activity.startActivity(intent);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_recycler_view);
+        setContentView(R.layout.activity_recipe_recycler_view);
 
-        recyclerRecipe = findViewById(R.id.recyclerUser);
+        recyclerRecipe = findViewById(R.id.recyclerRecipe);
 
         adapteRecipe = new AdapteRecipe(listRecipe);
 
