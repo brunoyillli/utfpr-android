@@ -61,5 +61,9 @@
     <string name="nome_utfpr">UTFPR - Universidade Tecnológica Federal do Paraná</string>
     <string name="nome_especializacao">Técnologia em Java</string>
     <string name="descricao_projeto">Sistema para gerenciar as duas receitas!</string>
+    <string name="voltar">VOLTAR</string>
+    <string name="email_criador_utfpr">brunomendescarvalho@alunos.utfpr.edu.br\n</string>
+    <string name="adicionar">Adicionar</string>
+    <string name="sobre">Sobre</string>
 
 </resources>

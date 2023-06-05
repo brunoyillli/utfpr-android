@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.github.brunoyillli.organizadorreceitas.adapter.AdapterUser;
+import io.github.brunoyillli.organizadorreceitas.entity.Recipe;
 import io.github.brunoyillli.organizadorreceitas.entity.User;
 
 public class UserRecyclerViewActivity extends AppCompatActivity {
@@ -22,6 +24,10 @@ public class UserRecyclerViewActivity extends AppCompatActivity {
     private RecyclerView recyclerUser;
     private List<User> listUser = new ArrayList<>();
 
+    public static void menu(AppCompatActivity activity){
+        Intent intent = new Intent(activity, UserRecyclerViewActivity.class);
+        activity.startActivity(intent);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,4 +90,14 @@ public class UserRecyclerViewActivity extends AppCompatActivity {
                     categoriasFavoritas[i]));
         }
     }
+
+    public void abrirSobre(View view){
+        AuditActivity.audit(this);
+    }
+
+    public void abrirNovaReceita(View view){
+        RecipeCreationActivity.novaReceita(this);
+    }
+
+
 }

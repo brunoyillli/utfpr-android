@@ -48,6 +48,15 @@ public class RecipeCreationActivity extends AppCompatActivity {
     private static final int RADIO_BUTTON_ATIVADA = R.id.radioButtonAtivada;
     private static final int RADIO_BUTTON_DESATIVADA = R.id.radioButtonDesativada;
 
+    public static final String MODO    = "MODO";
+    public static final int    NOVO    = 1;
+
+    public static void novaReceita(AppCompatActivity activity){
+        Intent intent = new Intent(activity, RecipeCreationActivity.class);
+        intent.putExtra(MODO, NOVO);
+        activity.startActivityForResult(intent, NOVO);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -179,5 +188,9 @@ public class RecipeCreationActivity extends AppCompatActivity {
         Toast.makeText(this,
                 "Campos limpos para novo cadastro de receita!",
                 Toast.LENGTH_LONG).show();
+    }
+
+    public void voltarMenu(View view){
+        UserRecyclerViewActivity.menu(this);
     }
 }
