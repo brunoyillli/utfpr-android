@@ -34,19 +34,18 @@
     <string name="comida_japonesa">Comida japonesa</string>
     <string name="comida_brasileira">Comida brasileira</string>
     <string name="comida_francesa">Comida francesa</string>
+    <string name="feijoada">Feijoada</string>
+    <string name="buxada">Buxada</string>
+    <string name="catador">Feijão de corda</string>
+    <string name="baiao_de_dois">Baião de dois</string>
+    <string name="salmao_grelhado">Salmão Grelhado</string>
+    <string name="pizza">Pizza</string>
+    <string name="macarronada">Macarronada</string>
+    <string name="farofa">Farofa</string>
+    <string name="panqueca">Panqueca</string>
+
     <string name="salvar">Salvar</string>
     <string name="limpar">Limpar</string>
-
-    <string name="luiz">Luiz</string>
-    <string name="maria">Maria</string>
-    <string name="jose">José</string>
-    <string name="ana">Ana</string>
-    <string name="pedro">Pedro</string>
-    <string name="carla">Carla</string>
-    <string name="marcos">Marcos</string>
-    <string name="fernanda">Fernanda</string>
-    <string name="rodrigo">Rodrigo</string>
-    <string name="luana">Luana</string>
 
     <string name="masculino">Masculino</string>
     <string name="feminino">Feminino</string>
