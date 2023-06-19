@@ -7,17 +7,23 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.IOException;
@@ -46,6 +52,7 @@ public class RecipeCreationActivity extends AppCompatActivity {
     private String categoriaSelecionada;
     private CheckBox checkBoxCafeManha, checkBoxAlmoco, checkBoxCafeTarde, checkBoxJanta;
 
+    private RadioButton radioButtonAtivada, radioButtonDesativada;
     private static final int RADIO_BUTTON_ATIVADA = R.id.radioButtonAtivada;
     private static final int RADIO_BUTTON_DESATIVADA = R.id.radioButtonDesativada;
 
@@ -53,6 +60,9 @@ public class RecipeCreationActivity extends AppCompatActivity {
     public static final String RECIPE = "RECIPE";
 
     public static final int NOVO = 1;
+    public static final int ALTERAR = 2;
+
+    private int modo;
 
     public static void novaReceita(AppCompatActivity activity) {
         Intent intent = new Intent(activity, RecipeCreationActivity.class);
@@ -64,6 +74,12 @@ public class RecipeCreationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_creation);
+
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null){
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
         recipe = new Recipe("", "", "", "",
                 0, null, new ArrayList<>(), true, "");
         photo = null;
@@ -75,6 +91,8 @@ public class RecipeCreationActivity extends AppCompatActivity {
         editTextServingCount = findViewById(R.id.editTextServingCount);
         imageViewReceitaSelecionada = findViewById(R.id.imageViewReceitaSelecionada);
         radioGroupReceitaIsActive = findViewById(R.id.radioGroupReceitaIsActive);
+        radioButtonAtivada = findViewById(R.id.radioButtonAtivada);
+        radioButtonDesativada = findViewById(R.id.radioButtonDesativada);
         checkBoxCafeManha = findViewById(R.id.checkBoxCafeManha);
         checkBoxAlmoco = findViewById(R.id.checkBoxAlmoco);
         checkBoxCafeTarde = findViewById(R.id.checkBoxCafeTarde);
@@ -116,6 +134,55 @@ public class RecipeCreationActivity extends AppCompatActivity {
             }
         });
 
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        if (bundle != null) {
+
+            modo = bundle.getInt(MODO, NOVO);
+
+            if (modo == NOVO) {
+                setTitle(getString(R.string.nova_receita));
+            } else {
+                Recipe recipe = (Recipe) bundle.getSerializable(RecipeCreationActivity.RECIPE, Recipe.class);
+                popularCamposEdicao(recipe);
+            }
+        }
+
+    }
+
+    private void popularCamposEdicao(Recipe recipe) {
+
+        editTextName.setText(recipe.getName());
+        editTextIngredients.setText(recipe.getIngredients());
+        editTextInstructions.setText(recipe.getInstructions());
+        editTextPreparationTime.setText(recipe.getPreparationTime());
+        editTextServingCount.setText(String.valueOf(recipe.getServingCount()));
+        if (recipe.isActive()) {
+            radioButtonAtivada.setChecked(true);
+        } else {
+            radioButtonDesativada.setChecked(true);
+        }
+        for (MealTypeEnum meal : recipe.getMealType()) {
+            if(meal.equals(MealTypeEnum.CAFE_DA_MANHA)){
+                checkBoxCafeManha.setChecked(true);
+            } else if (meal.equals(MealTypeEnum.ALMOCO)) {
+                checkBoxAlmoco.setChecked(true);
+            } else if (meal.equals(MealTypeEnum.CAFE_DA_TARDE)) {
+                checkBoxCafeTarde.setChecked(true);
+            } else if (meal.equals(MealTypeEnum.JANTA)) {
+                checkBoxJanta.setChecked(true);
+            }
+        }
+
+        String categoria = recipe.getCategoria();
+        ArrayAdapter<String> adapter = (ArrayAdapter<String>) spinnerCategorias.getAdapter();
+        int position = adapter.getPosition(categoria);
+
+        if (position != -1) {
+            spinnerCategorias.setSelection(position);
+        }
+
+        setTitle(getString(R.string.alterar_receita));
     }
 
     public void capturePhoto(View view) {
@@ -130,7 +197,7 @@ public class RecipeCreationActivity extends AppCompatActivity {
                 getString(R.string.selecionar_foto)));
     }
 
-    public void cadastrarReceita(View view) {
+    public void cadastrarReceita() {
         int checkedRadioButtonId = radioGroupReceitaIsActive.getCheckedRadioButtonId();
         List<MealTypeEnum> listTipoRefeicao = new ArrayList<>();
         if (editTextName.getText().toString().isEmpty() ||
@@ -158,11 +225,14 @@ public class RecipeCreationActivity extends AppCompatActivity {
 
         if (checkBoxCafeManha.isChecked()) {
             listTipoRefeicao.add(MealTypeEnum.CAFE_DA_MANHA);
-        } else if (checkBoxAlmoco.isChecked()) {
+        }
+        if (checkBoxAlmoco.isChecked()) {
             listTipoRefeicao.add(MealTypeEnum.ALMOCO);
-        } else if (checkBoxCafeTarde.isChecked()) {
+        }
+        if (checkBoxCafeTarde.isChecked()) {
             listTipoRefeicao.add(MealTypeEnum.CAFE_DA_TARDE);
-        } else if (checkBoxJanta.isChecked()) {
+        }
+        if (checkBoxJanta.isChecked()) {
             listTipoRefeicao.add(MealTypeEnum.JANTA);
         }
         recipe.setMealType(listTipoRefeicao);
@@ -184,7 +254,7 @@ public class RecipeCreationActivity extends AppCompatActivity {
         finish();
     }
 
-    public void limpar(View view) {
+    public void limpar() {
         editTextName.setText("");
         editTextIngredients.setText("");
         editTextInstructions.setText("");
@@ -204,7 +274,7 @@ public class RecipeCreationActivity extends AppCompatActivity {
                 Toast.LENGTH_LONG).show();
     }
 
-    public void voltarMenu(View view) {
+    public void voltarMenu() {
         onBackPressed();
     }
 
@@ -212,5 +282,32 @@ public class RecipeCreationActivity extends AppCompatActivity {
     public void onBackPressed() {
         setResult(Activity.RESULT_CANCELED);
         finish();
+    }
+
+    public static void alterarRecipe(AppCompatActivity activity, Recipe recipe) {
+        Intent intent = new Intent(activity, RecipeCreationActivity.class);
+        intent.putExtra(MODO, ALTERAR);
+        intent.putExtra(RECIPE, recipe);
+
+        activity.startActivityForResult(intent, ALTERAR);
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.recipe_menu_cadastro, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.menuItemSalvarReceita){
+            cadastrarReceita();
+        }else if(item.getItemId() == R.id.menuItemLimparReceita){
+            limpar();
+        }else if(item.getItemId() == android.R.id.home){
+            voltarMenu();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

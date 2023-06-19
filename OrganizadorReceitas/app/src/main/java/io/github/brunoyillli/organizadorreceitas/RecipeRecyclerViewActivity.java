@@ -3,10 +3,15 @@ package io.github.brunoyillli.organizadorreceitas;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ActionMode;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -25,6 +30,46 @@ public class RecipeRecyclerViewActivity extends AppCompatActivity {
     private List<Recipe> listRecipe = new ArrayList<>();
 
     private AdapteRecipe adapteRecipe;
+
+    private int posicaoSelecionada = -1;
+
+    private ActionMode actionMode;
+
+    private ActionMode.Callback mActionModeCallBack = new ActionMode.Callback() {
+
+        @Override
+        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+            MenuInflater inflater = mode.getMenuInflater();
+            inflater.inflate(R.menu.recipe_menu_contexto, menu);
+            return true;
+        }
+
+        @Override
+        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+            return false;
+        }
+
+        @Override
+        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+            if(item.getItemId() == R.id.menuItemEditar){
+                alterarReceita();
+                mode.finish();
+                return true;
+            } else if(item.getItemId() == R.id.menuItemExcluir){
+                removerReceita();
+                mode.finish();
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        @Override
+        public void onDestroyActionMode(ActionMode mode) {
+            actionMode = null;
+            recyclerRecipe.setEnabled(true);
+        }
+    };
 
     public static void menu(AppCompatActivity activity) {
         Intent intent = new Intent(activity, RecipeRecyclerViewActivity.class);
@@ -64,13 +109,11 @@ public class RecipeRecyclerViewActivity extends AppCompatActivity {
 
                             @Override
                             public void onLongItemClick(View view, int position) {
-                                Recipe recipe = listRecipe.get(position);
-                                Toast.makeText(getApplicationContext(),
-                                        getString(R.string.receita_pressionada_detalhes) +
-                                                recipe.getName() + " " +
-                                                recipe.getCategoria() + " " +
-                                                recipe.getInstructions() + " " +
-                                                " " + recipe.getPreparationTime(), Toast.LENGTH_SHORT).show();
+                                if (actionMode == null){
+                                    posicaoSelecionada = position;
+                                    recyclerRecipe.setEnabled(false);
+                                    actionMode = startActionMode(mActionModeCallBack);
+                                }
                             }
 
 
@@ -79,11 +122,11 @@ public class RecipeRecyclerViewActivity extends AppCompatActivity {
         );
     }
 
-    public void abrirSobre(View view) {
+    public void abrirSobre() {
         AuditActivity.audit(this);
     }
 
-    public void abrirNovaReceita(View view) {
+    public void abrirNovaReceita() {
         RecipeCreationActivity.novaReceita(this);
     }
 
@@ -91,10 +134,42 @@ public class RecipeRecyclerViewActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (resultCode == Activity.RESULT_OK && data != null) {
             Recipe recipe = (Recipe) data.getSerializableExtra(RecipeCreationActivity.RECIPE);
-            listRecipe.add(recipe);
+            if (requestCode == RecipeCreationActivity.ALTERAR){
+                listRecipe.remove(posicaoSelecionada);
+                listRecipe.add(posicaoSelecionada, recipe);
+                posicaoSelecionada = -1;
+            }else{
+                listRecipe.add(recipe);
+            }
             adapteRecipe.notifyDataSetChanged();
         }
+        adapteRecipe.notifyDataSetChanged();
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.principal_opcoes, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.menuItemAdicionar){
+            abrirNovaReceita();
+        }else if(item.getItemId() == R.id.menuItemSobre){
+            abrirSobre();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void removerReceita() {
+        listRecipe.remove(posicaoSelecionada);
+        adapteRecipe.notifyDataSetChanged();
+    }
+
+    private void alterarReceita() {
+        Recipe recipe = listRecipe.get(posicaoSelecionada);
+        RecipeCreationActivity.alterarRecipe(this, recipe);
+    }
 }

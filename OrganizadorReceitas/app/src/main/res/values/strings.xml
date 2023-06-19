@@ -67,5 +67,9 @@
     <string name="adicionar">Adicionar</string>
     <string name="sobre">Sobre</string>
     <string name="tipo_refeicao">Tipo de Refeicao</string>
+    <string name="editar">Editar</string>
+    <string name="excluir">Excluir</string>
+    <string name="nova_receita">Nova Receita</string>
+    <string name="alterar_receita">Alterar Receita</string>
 
 </resources>
