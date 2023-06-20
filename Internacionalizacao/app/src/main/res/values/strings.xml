@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Internationalization</string>
+    <string name="nome">Name</string>
+    <string name="sobrenome">Last Name</string>
+    <string name="enviar">Send</string>
+    <string name="limpar">Clear</string>
+    <string name="nome_completo">"Full Name:  "</string>
+    <string name="novo_cadastro">New Register</string>
+    <string name="frase_boas_vindas">Hello, welcome to the internationalization example!</string>
+    <string name="utfpr" translatable="false">UTFPR</string>
+</resources>
