@@ -1,7 +1,10 @@
 package io.github.brunoyillli.organizadorreceitas;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.ActionMode;
 import android.view.Menu;
@@ -14,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,6 +38,13 @@ public class RecipeRecyclerViewActivity extends AppCompatActivity {
     private int posicaoSelecionada = -1;
 
     private ActionMode actionMode;
+
+    private static final String ARQUIVO_TEMAS =
+            "io.github.brunoyillli.sharedpreferences.PREFERENCIAS_TEMAS";
+
+    private static final String TEMAS = "TEMAS";
+
+    private boolean isDarkTheme = false;
 
     private ActionMode.Callback mActionModeCallBack = new ActionMode.Callback() {
 
@@ -120,6 +131,7 @@ public class RecipeRecyclerViewActivity extends AppCompatActivity {
                         }
                 )
         );
+
     }
 
     public void abrirSobre() {
@@ -159,8 +171,36 @@ public class RecipeRecyclerViewActivity extends AppCompatActivity {
             abrirNovaReceita();
         }else if(item.getItemId() == R.id.menuItemSobre){
             abrirSobre();
+        }else if(item.getItemId() == R.id.menuItemTemaClaro){
+            salvarPreferenciaTema(false);
+        }else if(item.getItemId() == R.id.menuItemTemaEscuro){
+            salvarPreferenciaTema(true);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void aplicarTema(boolean isNightModeEnabled) {
+        if (isNightModeEnabled) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+    }
+
+    private void salvarPreferenciaTema(boolean isNightModeEnabled) {
+        SharedPreferences shared = getSharedPreferences(ARQUIVO_TEMAS, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = shared.edit();
+        editor.putBoolean(TEMAS, isNightModeEnabled);
+        editor.commit();
+        isDarkTheme = isNightModeEnabled;
+
+        aplicarTema(isDarkTheme);
+    }
+
+    private void lerPreferenciaTema() {
+        SharedPreferences shared = getSharedPreferences(ARQUIVO_TEMAS, Context.MODE_PRIVATE);
+        isDarkTheme = shared.getBoolean(TEMAS, isDarkTheme);
+        aplicarTema(isDarkTheme);
     }
 
     private void removerReceita() {
@@ -171,5 +211,23 @@ public class RecipeRecyclerViewActivity extends AppCompatActivity {
     private void alterarReceita() {
         Recipe recipe = listRecipe.get(posicaoSelecionada);
         RecipeCreationActivity.alterarRecipe(this, recipe);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem item;
+        if(isDarkTheme){
+            item =menu.findItem(R.id.menuItemTemaEscuro);
+        }else{
+            item = menu.findItem(R.id.menuItemTemaClaro);
+        }
+        item.setChecked(true);
+        return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        lerPreferenciaTema();
     }
 }

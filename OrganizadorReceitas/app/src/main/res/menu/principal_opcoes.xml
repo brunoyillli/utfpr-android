@@ -10,4 +10,14 @@
     <item
         android:id="@+id/menuItemSobre"
         android:title="@string/sobre" />
+    <group
+        android:id="@+id/groupTemas"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/menuItemTemaClaro"
+            android:title="@string/tema_claro" />
+        <item
+            android:id="@+id/menuItemTemaEscuro"
+            android:title="@string/tema_escuro" />
+    </group>
 </menu>

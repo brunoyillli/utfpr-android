@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">OrganizadorReceitas</string>
+    <string name="nome">Nome</string>
+    <string name="ingredientes">Ingredientes</string>
+    <string name="modo_preparado">Modo de Preparo</string>
+    <string name="tempo_de_preparo">Tempo de Preparo</string>
+    <string name="numero_de_porcoes">Número de Porções</string>
+    <string name="cadastro_de_receitas">Cadastro de Receitas</string>
+    <string name="selecionar_foto">Selecionar Foto</string>
+    <string name="caturar_foto">Capturar Foto</string>
+    <string name="receitada_cadastrada_com_sucesso">Receita cadastrada com sucesso!</string>
+    <string name="por_favor_preencha_todos_os_campos">Por favor, preencha todos os campos.</string>
+    <string name="cafe_da_manha">Café da Manhã</string>
+    <string name="almoco">Almoço</string>
+    <string name="cafe_da_tarde">Café da tarde</string>
+    <string name="janta">Janta</string>
+    <string name="limpar_todos_campos">Limpar todos campos</string>
+    <string name="receita_ativada">Receita Ativada</string>
+    <string name="receita_desativada">Receita Desativada</string>
+    <string name="categorias">Categorias</string>
+
+    <string name="sushi">Sushi</string>
+    <string name="massas">Massas</string>
+    <string name="sobremesas">Sobremesas</string>
+    <string name="pratos_vegetarianos">Pratos vegetarianos</string>
+    <string name="pratos_veganos">Pratos veganos</string>
+    <string name="saladas">Saladas</string>
+    <string name="churrasco">Churrasco</string>
+    <string name="comida_mexicana">Comida mexicana</string>
+    <string name="comida_italiana">Comida italiana</string>
+    <string name="comida_indiana">Comida indiana</string>
+    <string name="comida_tailandesa">Comida tailandesa</string>
+    <string name="comida_chinesa">Comida chinesa</string>
+    <string name="comida_japonesa">Comida japonesa</string>
+    <string name="comida_brasileira">Comida brasileira</string>
+    <string name="comida_francesa">Comida francesa</string>
+    <string name="feijoada">Feijoada</string>
+    <string name="buxada">Buxada</string>
+    <string name="catador">Feijão de corda</string>
+    <string name="baiao_de_dois">Baião de dois</string>
+    <string name="salmao_grelhado">Salmão Grelhado</string>
+    <string name="pizza">Pizza</string>
+    <string name="macarronada">Macarronada</string>
+    <string name="farofa">Farofa</string>
+    <string name="panqueca">Panqueca</string>
+
+    <string name="salvar">Salvar</string>
+    <string name="limpar">Limpar</string>
+
+    <string name="masculino">Masculino</string>
+    <string name="feminino">Feminino</string>
+    <string name="genero">Genero</string>
+    <string name="categoria_favorita">Categoria favorita</string>
+    <string name="data_inscricao">Data inscrição</string>
+    <string name="comida_favorita">Comida Favorita</string>
+    <string name="usuario_pressionado_detalhes">"Usuario pressionado detalhes: : "</string>
+    <string name="receita_pressionada_detalhes">"Receita pressionado detalhes: : "</string>
+    <string name="usuario_pressionado">"Usuario pressionado: "</string>
+    <string name="receita_pressionada">"Receita pressionada: "</string>
+    <string name="nome_utfpr">UTFPR - Universidade Tecnológica Federal do Paraná</string>
+    <string name="nome_especializacao">Técnologia em Java</string>
+    <string name="descricao_projeto">Sistema para gerenciar as suas receitas!</string>
+    <string name="voltar">VOLTAR</string>
+    <string name="adicionar">Adicionar</string>
+    <string name="sobre">Sobre</string>
+    <string name="tipo_refeicao">Tipo de Refeicao</string>
+    <string name="editar">Editar</string>
+    <string name="excluir">Excluir</string>
+    <string name="nova_receita">Nova Receita</string>
+    <string name="alterar_receita">Alterar Receita</string>
+    <string name="tema_claro">Tema Claro</string>
+    <string name="tema_escuro">Tema Escuro</string>
+
+</resources>
