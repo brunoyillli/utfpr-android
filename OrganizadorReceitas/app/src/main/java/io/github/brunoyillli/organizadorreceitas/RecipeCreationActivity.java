@@ -33,6 +33,7 @@ import java.util.List;
 
 import io.github.brunoyillli.organizadorreceitas.entity.MealTypeEnum;
 import io.github.brunoyillli.organizadorreceitas.entity.Recipe;
+import io.github.brunoyillli.organizadorreceitas.persistencia.OrganizadorReceitasDatabase;
 
 public class RecipeCreationActivity extends AppCompatActivity {
 
@@ -143,7 +144,7 @@ public class RecipeCreationActivity extends AppCompatActivity {
             if (modo == NOVO) {
                 setTitle(getString(R.string.nova_receita));
             } else {
-                Recipe recipe = (Recipe) bundle.getSerializable(RecipeCreationActivity.RECIPE, Recipe.class);
+                recipe = (Recipe) bundle.getSerializable(RecipeCreationActivity.RECIPE, Recipe.class);
                 popularCamposEdicao(recipe);
             }
         }
@@ -239,6 +240,15 @@ public class RecipeCreationActivity extends AppCompatActivity {
 
         recipe.setCategoria(categoriaSelecionada);
 
+        OrganizadorReceitasDatabase database = OrganizadorReceitasDatabase.getDatabase(this);
+
+
+        if(modo == NOVO){
+            database.recipeDao().insert(recipe);
+        }else{
+            database.recipeDao().update(recipe);
+        }
+
         Toast.makeText(this,
                 R.string.receitada_cadastrada_com_sucesso, Toast.LENGTH_LONG).show();
 
@@ -270,7 +280,7 @@ public class RecipeCreationActivity extends AppCompatActivity {
         checkBoxJanta.setChecked(false);
         spinnerCategorias.setSelection(0);
         Toast.makeText(this,
-                "Campos limpos para novo cadastro de receita!",
+                R.string.campos_limpos_para_novo_cadastro_de_receita,
                 Toast.LENGTH_LONG).show();
     }
 

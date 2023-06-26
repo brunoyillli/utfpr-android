@@ -2,21 +2,42 @@ package io.github.brunoyillli.organizadorreceitas.entity;
 
 import android.graphics.Bitmap;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+import org.jetbrains.annotations.NotNull;
+
 import java.io.Serializable;
 import java.util.List;
 
+@Entity
 public class Recipe implements Serializable {
+
+    @PrimaryKey(autoGenerate = true)
+    private int id;
+
+    @NotNull
     private String name;
+    @NotNull
     private String ingredients;
+
+    @NotNull
     private String instructions;
+
+    @NotNull
     private String preparationTime;
+
+    @NotNull
     private int servingCount;
     private transient Bitmap photo;
 
+    @NotNull
     private List<MealTypeEnum> mealType;
 
+    @NotNull
     private boolean active;
 
+    @NotNull
     private String categoria;
 
     public Recipe(String name, String ingredients, String instructions, String preparationTime,
@@ -106,5 +127,13 @@ public class Recipe implements Serializable {
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

@@ -73,5 +73,6 @@
     <string name="alterar_receita">Change Recipe</string>
     <string name="tema_claro">Light Theme</string>
     <string name="tema_escuro">Dark Theme</string>
+    <string name="campos_limpos_para_novo_cadastro_de_receita">Clean fields for new revenue registration!</string>
 
 </resources>

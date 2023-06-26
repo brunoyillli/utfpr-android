@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.ActionMode;
 import android.view.Menu;
@@ -27,6 +26,7 @@ import java.util.List;
 
 import io.github.brunoyillli.organizadorreceitas.adapter.AdapteRecipe;
 import io.github.brunoyillli.organizadorreceitas.entity.Recipe;
+import io.github.brunoyillli.organizadorreceitas.persistencia.OrganizadorReceitasDatabase;
 
 public class RecipeRecyclerViewActivity extends AppCompatActivity {
 
@@ -131,7 +131,7 @@ public class RecipeRecyclerViewActivity extends AppCompatActivity {
                         }
                 )
         );
-
+        popularLista();
     }
 
     public void abrirSobre() {
@@ -182,9 +182,20 @@ public class RecipeRecyclerViewActivity extends AppCompatActivity {
     private void aplicarTema(boolean isNightModeEnabled) {
         if (isNightModeEnabled) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            popularLista();
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            popularLista();
         }
+    }
+
+    private void popularLista() {
+        OrganizadorReceitasDatabase database = OrganizadorReceitasDatabase.getDatabase(this);
+        List<Recipe> all = database.recipeDao().findAll();
+        listRecipe.clear();
+        listRecipe.addAll(all);
+        adapteRecipe.notifyDataSetChanged();
+
     }
 
     private void salvarPreferenciaTema(boolean isNightModeEnabled) {
@@ -204,6 +215,9 @@ public class RecipeRecyclerViewActivity extends AppCompatActivity {
     }
 
     private void removerReceita() {
+        OrganizadorReceitasDatabase database = OrganizadorReceitasDatabase.getDatabase(this);
+        Recipe recipeSelecionado = listRecipe.get(posicaoSelecionada);
+        database.recipeDao().delete(recipeSelecionado);
         listRecipe.remove(posicaoSelecionada);
         adapteRecipe.notifyDataSetChanged();
     }
