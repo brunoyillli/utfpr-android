@@ -72,5 +72,8 @@
     <string name="tema_claro">Tema Claro</string>
     <string name="tema_escuro">Tema Escuro</string>
     <string name="campos_limpos_para_novo_cadastro_de_receita">Campos limpos para novo cadastro de receita!</string>
+    <string name="deseja_realmente_excluir_a_seguinte_receita">Deseja realmente excluir a seguinte receita ?</string>
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
 
 </resources>

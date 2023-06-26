@@ -1,7 +1,9 @@
 package io.github.brunoyillli.organizadorreceitas;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -62,15 +64,15 @@ public class RecipeRecyclerViewActivity extends AppCompatActivity {
 
         @Override
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-            if(item.getItemId() == R.id.menuItemEditar){
+            if (item.getItemId() == R.id.menuItemEditar) {
                 alterarReceita();
                 mode.finish();
                 return true;
-            } else if(item.getItemId() == R.id.menuItemExcluir){
-                removerReceita();
+            } else if (item.getItemId() == R.id.menuItemExcluir) {
+                preparaExcluirReceita();
                 mode.finish();
                 return true;
-            }else{
+            } else {
                 return false;
             }
         }
@@ -120,7 +122,7 @@ public class RecipeRecyclerViewActivity extends AppCompatActivity {
 
                             @Override
                             public void onLongItemClick(View view, int position) {
-                                if (actionMode == null){
+                                if (actionMode == null) {
                                     posicaoSelecionada = position;
                                     recyclerRecipe.setEnabled(false);
                                     actionMode = startActionMode(mActionModeCallBack);
@@ -146,11 +148,11 @@ public class RecipeRecyclerViewActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (resultCode == Activity.RESULT_OK && data != null) {
             Recipe recipe = (Recipe) data.getSerializableExtra(RecipeCreationActivity.RECIPE);
-            if (requestCode == RecipeCreationActivity.ALTERAR){
+            if (requestCode == RecipeCreationActivity.ALTERAR) {
                 listRecipe.remove(posicaoSelecionada);
                 listRecipe.add(posicaoSelecionada, recipe);
                 posicaoSelecionada = -1;
-            }else{
+            } else {
                 listRecipe.add(recipe);
             }
             adapteRecipe.notifyDataSetChanged();
@@ -167,13 +169,13 @@ public class RecipeRecyclerViewActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.menuItemAdicionar){
+        if (item.getItemId() == R.id.menuItemAdicionar) {
             abrirNovaReceita();
-        }else if(item.getItemId() == R.id.menuItemSobre){
+        } else if (item.getItemId() == R.id.menuItemSobre) {
             abrirSobre();
-        }else if(item.getItemId() == R.id.menuItemTemaClaro){
+        } else if (item.getItemId() == R.id.menuItemTemaClaro) {
             salvarPreferenciaTema(false);
-        }else if(item.getItemId() == R.id.menuItemTemaEscuro){
+        } else if (item.getItemId() == R.id.menuItemTemaEscuro) {
             salvarPreferenciaTema(true);
         }
         return super.onOptionsItemSelected(item);
@@ -214,14 +216,35 @@ public class RecipeRecyclerViewActivity extends AppCompatActivity {
         aplicarTema(isDarkTheme);
     }
 
-    private void removerReceita() {
+    private void preparaExcluirReceita() {
+        String mensagemExcluir = getString(R.string.deseja_realmente_excluir_a_seguinte_receita)
+                + "\n" + listRecipe.get(posicaoSelecionada).getName();
+        DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        excluirReceita();
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        break;
+                }
+            }
+        };
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(mensagemExcluir)
+                .setPositiveButton(R.string.sim, listener)
+                .setNegativeButton(R.string.nao, listener)
+                .show();
+
+    }
+
+    private void excluirReceita(){
         OrganizadorReceitasDatabase database = OrganizadorReceitasDatabase.getDatabase(this);
         Recipe recipeSelecionado = listRecipe.get(posicaoSelecionada);
         database.recipeDao().delete(recipeSelecionado);
         listRecipe.remove(posicaoSelecionada);
         adapteRecipe.notifyDataSetChanged();
     }
-
     private void alterarReceita() {
         Recipe recipe = listRecipe.get(posicaoSelecionada);
         RecipeCreationActivity.alterarRecipe(this, recipe);
@@ -230,9 +253,9 @@ public class RecipeRecyclerViewActivity extends AppCompatActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         MenuItem item;
-        if(isDarkTheme){
-            item =menu.findItem(R.id.menuItemTemaEscuro);
-        }else{
+        if (isDarkTheme) {
+            item = menu.findItem(R.id.menuItemTemaEscuro);
+        } else {
             item = menu.findItem(R.id.menuItemTemaClaro);
         }
         item.setChecked(true);

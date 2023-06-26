@@ -74,5 +74,8 @@
     <string name="tema_claro">Light Theme</string>
     <string name="tema_escuro">Dark Theme</string>
     <string name="campos_limpos_para_novo_cadastro_de_receita">Clean fields for new revenue registration!</string>
+    <string name="deseja_realmente_excluir_a_seguinte_receita">Do you really want to delete the following recipe?</string>
+    <string name="sim">Yes</string>
+    <string name="nao">No</string>
 
 </resources>
